@@ -1,7 +1,10 @@
 package io.github.rafaelframos2016.tielerama.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -9,6 +12,8 @@ import java.time.LocalDate;
 @Entity
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +25,8 @@ public class Cliente {
     @Column(nullable = false, length=11)
     private String cpf;
 
-    @Column(name="data_cadastro")
+    @Column(name="data_cadastro", updatable = false)
+    @JsonFormat(pattern="dd/MM/yyyy")
     private LocalDate dataCadastro;
 
     @PrePersist
